@@ -55,10 +55,7 @@ function mountGrid(container, db, navigate, showSheet, hideSheet, allPrefs) {
   `;
 
   container.querySelectorAll('.cat-card').forEach(card => {
-    card.addEventListener('click', () => {
-      location.hash = `categories/${card.dataset.cat}`;
-      mountCategory(container, db, navigate, showSheet, hideSheet, card.dataset.cat, null);
-    });
+    card.addEventListener('click', () => navigate(`categories/${card.dataset.cat}`));
   });
 }
 
@@ -110,10 +107,7 @@ async function mountCategory(container, db, navigate, showSheet, hideSheet, catI
     <button class="fab" id="add-pref-btn" aria-label="Add preference">+</button>
   `;
 
-  container.querySelector('#back-to-cats').addEventListener('click', () => {
-    location.hash = 'categories';
-    mountGrid(container, db, navigate, showSheet, hideSheet, null);
-  });
+  container.querySelector('#back-to-cats').addEventListener('click', () => navigate('categories'));
 
   function openPrefSheet(pref = null) {
     const isEdit = !!pref;

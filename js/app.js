@@ -61,6 +61,7 @@ export async function navigate(route) {
   if (!ROUTES[name]) return navigate('home');
   if (currentRoute === route) return;
   currentRoute = route;
+  location.hash = route;
 
   hideSheet();
   main.innerHTML = '<div class="loading">Loading…</div>';
@@ -74,12 +75,6 @@ export async function navigate(route) {
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.route === name);
   });
-
-  if (!NAV_ROUTES.has(name)) {
-    location.hash = name;
-  } else {
-    location.hash = name;
-  }
 }
 
 // Nav

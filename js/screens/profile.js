@@ -58,6 +58,7 @@ export async function mount(container, db, navigate, showSheet, hideSheet) {
       const fd = new FormData(e.target);
       const data = Object.fromEntries(fd.entries());
       await db.saveProfile(data);
+      await syncProfileDates(db, data);
       navigate('home');
     });
   }
@@ -67,4 +68,36 @@ export async function mount(container, db, navigate, showSheet, hideSheet) {
 
 function esc(v) {
   return v ? String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;') : '';
+}
+
+const PROFILE_DATE_SOURCES = {
+  birthday:    { source: 'profile-birthday',    type: 'birthday',    title: name => `${name || 'Her'} birthday` },
+  anniversary: { source: 'profile-anniversary', type: 'anniversary', title: name => 'Anniversary' },
+};
+
+async function syncProfileDates(db, profile) {
+  const allDates = await db.getDates();
+
+  for (const [field, meta] of Object.entries(PROFILE_DATE_SOURCES)) {
+    const dateVal = profile[field];
+    const existing = allDates.find(d => d.source === meta.source);
+
+    if (dateVal) {
+      const payload = {
+        title: meta.title(profile.name),
+        type: meta.type,
+        date: dateVal,
+        recurring: true,
+        leadTimeDays: 14,
+        source: meta.source,
+      };
+      if (existing) {
+        await db.updateDate(existing.id, payload);
+      } else {
+        await db.addDate(payload);
+      }
+    } else if (existing) {
+      await db.deleteDate(existing.id);
+    }
+  }
 }
