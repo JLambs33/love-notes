@@ -75,11 +75,7 @@ export async function navigate(route) {
     btn.classList.toggle('active', btn.dataset.route === name);
   });
 
-  if (!NAV_ROUTES.has(name)) {
-    location.hash = name;
-  } else {
-    location.hash = name;
-  }
+  location.hash = route;
 }
 
 // Nav
