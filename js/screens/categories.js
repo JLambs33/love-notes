@@ -1,14 +1,14 @@
 const CATEGORIES = [
-  { id: 'food', label: 'Food', icon: '🍕', desc: 'Cuisines, dishes, restaurants' },
-  { id: 'drinks', label: 'Drinks', icon: '☕', desc: 'Coffee order, wines, cocktails' },
-  { id: 'entertainment', label: 'Movies & TV', icon: '🎬', desc: 'Films, shows, genres' },
-  { id: 'music', label: 'Music', icon: '🎵', desc: 'Artists, songs, genres' },
-  { id: 'books', label: 'Books', icon: '📚', desc: 'Books, authors, genres' },
-  { id: 'places', label: 'Places', icon: '🌍', desc: 'Dream destinations, local favorites' },
-  { id: 'activities', label: 'Activities', icon: '🎯', desc: 'Hobbies, sports, interests' },
-  { id: 'colors', label: 'Colors', icon: '🎨', desc: 'Favorite and least favorite colors' },
-  { id: 'scents', label: 'Scents', icon: '🌸', desc: 'Perfumes, candles, flowers' },
-  { id: 'gifts', label: 'Gifts', icon: '🎁', desc: 'Loved gifts, wish list ideas' },
+  { id: 'food', label: 'Food', icon: '🍕', desc: 'Cuisines, dishes, restaurants', placeholder: 'e.g. Thai food' },
+  { id: 'drinks', label: 'Drinks', icon: '☕', desc: 'Coffee order, wines, cocktails', placeholder: 'e.g. Oat milk latte' },
+  { id: 'entertainment', label: 'Movies & TV', icon: '🎬', desc: 'Films, shows, genres', placeholder: 'e.g. The Office' },
+  { id: 'music', label: 'Music', icon: '🎵', desc: 'Artists, songs, genres', placeholder: 'e.g. Taylor Swift' },
+  { id: 'books', label: 'Books', icon: '📚', desc: 'Books, authors, genres', placeholder: 'e.g. Harry Potter' },
+  { id: 'places', label: 'Places', icon: '🌍', desc: 'Dream destinations, local favorites', placeholder: 'e.g. Paris' },
+  { id: 'activities', label: 'Activities', icon: '🎯', desc: 'Hobbies, sports, interests', placeholder: 'e.g. Hiking' },
+  { id: 'colors', label: 'Colors', icon: '🎨', desc: 'Favorite and least favorite colors', placeholder: 'e.g. Forest green' },
+  { id: 'scents', label: 'Scents', icon: '🌸', desc: 'Perfumes, candles, flowers', placeholder: 'e.g. Vanilla candles' },
+  { id: 'gifts', label: 'Gifts', icon: '🎁', desc: 'Loved gifts, wish list ideas', placeholder: 'e.g. Bookstore gift card' },
 ];
 
 function esc(v) {
@@ -118,7 +118,7 @@ async function mountCategory(container, db, navigate, showSheet, hideSheet, catI
       </div>
       <div class="form-section">
         <label class="form-label">Item</label>
-        <input class="form-input" id="pref-item" type="text" placeholder="e.g. Sushi" value="${esc(pref?.item)}" autofocus>
+        <input class="form-input" id="pref-item" type="text" placeholder="${cat.placeholder}" value="${esc(pref?.item)}" autofocus>
       </div>
       <div class="form-section">
         <label class="form-label">Sentiment</label>
