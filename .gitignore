@@ -6,3 +6,10 @@ CLAUDE.md
 *.db
 .beads-credential-key
 .beads/proxieddb/
+
+# AI tooling
+.claude/
+.codex/
+.agents/
+.beads/
+AGENTS.md
